@@ -1,0 +1,12 @@
+
+---
+k3s_disable_components:
+  - traefik
+
+k3s_kubeconfig_src: /etc/rancher/k3s/k3s.yaml
+k3s_kubeconfig_dest: "/home/tklas/.kube/local.yaml"
+
+k3s_install_script: /tmp/k3s-install.sh
+
+uid: 1000
+guid: 1000

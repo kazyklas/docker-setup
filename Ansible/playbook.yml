@@ -1,0 +1,10 @@
+---
+- name: Bootstrap Arch system and install k3s
+  hosts: local
+  become: true
+
+  roles:
+    - pacman
+    - paru
+    - k3s   # (your existing logic, or inline tasks)
+

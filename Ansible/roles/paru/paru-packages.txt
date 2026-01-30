@@ -1,0 +1,12 @@
+crow
+fabric-ai
+google-chrome
+huenicorn
+lens-bin
+mpvpaper
+notion-app-electron
+openrgb-bin
+python-imageio-ffmpeg
+python-screeninfo
+visual-studio-code-electron-bin
+waypaper

@@ -1,0 +1,23 @@
+---
+- name: Ensure dependancies are installed
+  pacman:
+    name:
+      - base-devel
+      - git
+      - paru
+    state: present
+
+# get the pacman packages: pacman -Qqe > pacman-packages.txt
+- name: Install pacman packages
+  pacman:
+    name: "{{ item }}"
+    state: present
+  loop: >
+    {{
+      lookup('file', './roles/pacman/pacman-packages.txt')
+      .splitlines()
+      | reject('match', '^#')
+      | reject('equalto', '')
+      | list
+    }}
+

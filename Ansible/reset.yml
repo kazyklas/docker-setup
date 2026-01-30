@@ -1,0 +1,35 @@
+---
+- name: Reset / uninstall k3s from localhost
+  hosts: local
+  become: true
+
+  tasks:
+    - name: Stop k3s service if running
+      systemd:
+        name: k3s
+        state: stopped
+      ignore_errors: true
+
+    - name: Disable k3s service if present
+      systemd:
+        name: k3s
+        enabled: false
+      ignore_errors: true
+
+    - name: Run k3s uninstall script if it exists
+      command: /usr/local/bin/k3s-uninstall.sh
+      args:
+        removes: /usr/local/bin/k3s
+      ignore_errors: true
+
+    - name: Remove k3s data directories
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - /etc/rancher
+        - /var/lib/rancher
+        - /var/lib/kubelet
+        - /var/lib/cni
+        - /run/k3s
+        - /opt/cni

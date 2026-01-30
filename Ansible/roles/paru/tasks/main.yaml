@@ -1,0 +1,15 @@
+---
+- name: Ensure dependancies are installed
+  pacman:
+    name:
+      - base-devel
+      - git
+      - paru
+    state: present
+
+# get the paru packages: paru -Qmq > paru-packages.txt
+- name: Install AUR packages via paru
+  become: false
+  command: >
+    paru -S --needed --noconfirm {{ item }}
+  loop: "{{ lookup('file', './roles/paru/paru-packages.txt').splitlines() }}"
