@@ -1,0 +1,58 @@
+# values-local.yaml
+
+global:
+  image:
+    tag: "" # let chart decide; avoids mismatch issues
+
+crds:
+  install: true
+
+server:
+  replicas: 1
+
+  service:
+    type: ClusterIP
+
+  extraArgs:
+    - --insecure
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      memory: 256Mi
+
+configs:
+  params:
+    server.insecure: true
+
+  cm:
+    admin.enabled: true
+    exec.enabled: true
+
+dex:
+  enabled: false
+
+controller:
+  replicas: 1
+
+  resources:
+    requests:
+      cpu: 200m
+      memory: 256Mi
+    limits:
+      memory: 512Mi
+
+repoServer:
+  replicas: 1
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      memory: 256Mi
+
+applicationSet:
+  enabled: true
