@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cuda-devbox
+spec:
+  runtimeClassName: nvidia
+  restartPolicy: Never
+  containers:
+    - name: cuda
+      image: nvidia/cuda:13.1.0-devel-ubuntu24.04
+      command: ["/bin/bash", "-c", "--"]
+      args: ["sleep infinity"]
+      resources:
+        limits:
+          nvidia.com/gpu: 1
+      securityContext:
+        privileged: false
